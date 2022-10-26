@@ -1,0 +1,10 @@
+.button__ingredients {
+  background-color: rgb(240, 167, 30);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.button__ingredients--vegan {
+  background-color: rgb(43, 197, 146);
+}

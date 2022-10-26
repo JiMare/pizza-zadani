@@ -1,21 +1,19 @@
-import React, { useState } from "react";
-import './style.css';
+import React from "react";
+import "./style.css";
 
-const Check = () => {
-  const [checked, setChecked] = useState(false);
-  
+const Check = ({ checked, onChange, disabled }) => {
   const handleClick = () => {
-    setChecked(!checked);
+    onChange(!checked);
   };
-  
+
   return (
-    <button 
-      className="check"
+    <button
+      className={disabled ? "check check--disabled" : "check"}
       onClick={handleClick}
     >
-      {checked ? '✓' : ''}
+      {checked && !disabled ? "✓" : ""}
     </button>
-  )
+  );
 };
 
 export default Check;
