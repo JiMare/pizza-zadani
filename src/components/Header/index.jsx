@@ -3,13 +3,13 @@ import { usePrefs } from "../../prefs-context";
 import "./style.css";
 
 export const Header = () => {
-  const { veganOnly, handleVegan } = usePrefs();
+  const { veganOnly, toggleVeganOnly } = usePrefs();
   return (
     <header>
       <div className="pizza" />
       <h1>Build your own pizza</h1>
       <button
-        onClick={handleVegan}
+        onClick={toggleVeganOnly}
         className={
           veganOnly
             ? "button__ingredients"

@@ -6,13 +6,13 @@ import "./style.css";
 const ToppingsSelect = ({ toppings }) => {
   const { veganOnly } = usePrefs();
   const [checkedToppings, setCheckedToppings] = useState(
-    toppings.map((e) => false)
+    toppings.map((topping) => false)
   );
 
-  const handleCheckedChange = (index, checked) => {
+  const handleCheckedChange = (index) => {
     const newCheckedToppings = [...checkedToppings];
-    if (!veganOnly || (index !== 3 && index !== 11)) {
-      newCheckedToppings[index] = checked;
+    if (!veganOnly || toppings[index].vegan) {
+      newCheckedToppings[index] = !checkedToppings[index];
     }
     setCheckedToppings(newCheckedToppings);
   };
@@ -21,17 +21,15 @@ const ToppingsSelect = ({ toppings }) => {
     .filter((topping, index) =>
       !veganOnly
         ? checkedToppings[index]
-        : checkedToppings[index] &&
-          topping.name !== "Sausage" &&
-          topping.name !== "Prosciutto"
+        : checkedToppings[index] && topping.vegan
     )
     .map((topping) => topping.price)
     .reduce((sum, value) => {
       return sum + value;
     }, 0);
 
-  const selectedToppings = checkedToppings.filter((e, index) =>
-    !veganOnly ? e : e && index !== 3 && index !== 11
+  const selectedToppings = checkedToppings.filter((topping, index) =>
+    !veganOnly ? topping : topping && toppings[index].vegan
   ).length;
 
   return (
@@ -48,8 +46,8 @@ const ToppingsSelect = ({ toppings }) => {
             topping={topping}
             key={topping.name}
             checked={checkedToppings[index]}
-            onChangeChecked={(checked) => {
-              handleCheckedChange(index, checked);
+            onChangeChecked={() => {
+              handleCheckedChange(index);
             }}
           />
         ))}

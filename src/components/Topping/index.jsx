@@ -10,8 +10,7 @@ const Topping = ({ topping, checked, onChangeChecked }) => {
     onChangeChecked(checked);
   };
 
-  const isDisabled =
-    veganOnly && (topping.name === "Sausage" || topping.name === "Prosciutto");
+  const isDisabled = veganOnly && topping.vegan === false;
 
   return (
     <div className="topping">
